@@ -37,6 +37,13 @@ public class ParseUserAgentUADTFTest {
 		assertEquals(3, inputFields.size());
 	}
 	
-	
+		
+	@Test(expected=UDFArgumentException.class)
+	public void testInvalidInit() throws UDFArgumentException {
+		List<String> fieldNames = Arrays.asList("UA1", "UA2");
+		List<ObjectInspector> fieldOIs = Arrays.asList(PrimitiveObjectInspectorFactory.javaStringObjectInspector, PrimitiveObjectInspectorFactory.javaStringObjectInspector);
+		StructObjectInspector argOIs = ObjectInspectorFactory.getStandardStructObjectInspector(fieldNames, fieldOIs);
+		parseUserAgentUADTF.initialize(argOIs);
+	}
 
 }
